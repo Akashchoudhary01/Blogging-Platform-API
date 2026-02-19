@@ -56,43 +56,61 @@ const editPost = async (req, res) => {
       message: "All fields are mandatory",
     });
   }
-  const post = await BLOG.findById(postId);
-  if (!post) {
+try {
+    
+    const blog = await BLOG.findById(postId);
+  
+    if (!blog) {
+      return res.status(200).json({
+        success: false,
+        message: "Blog not found ! ",
+      });
+    }
+  
+    blog.title = title;
+    blog.category = category;
+    blog.content = content;
+    blog.tags = tags;
+  
+    await blog.save();
+  
+    return res.status(200).json({
+      success: true,
+      message: "Blog Updated Successfully",
+    });
+} catch (error) {
+    return res.status(200).json({
+        success : false,
+        message : error.message,
+    })
+    
+}
+};
+
+//
+const deletePost = async (req, res) => {
+  const id = req.params.id;
+
+  const blogs = await BLOG.findById(id);
+
+  if (!blogs) {
     return res.status(400).json({
       success: false,
-      message: "No blog found",
+      message: "blog not found",
     });
   }
 
   try {
-    post.title = title;
-    post.category = category;
-    post.content = content;
-    post.tags = tags;
-
-    await post.save();
-  } catch (e) {
-    return res.status(400).json({
-      success: false,
-      message: "e.message",
-    });
-  }
-};
-const deletePost = async (req, res) => {
-  const id = req.params._id;
-
-  const blogs = await BLOG.findByIdAndDelete(id);
-
-  if (!blogs) {
-    res.status(400).json({
-      success: false,
-      message: "blog not found",
-    });
-
+    await BLOG.findByIdAndDelete(id);
 
     return res.status(200).json({
       success: true,
       message: "blog deleted Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
     });
   }
 };

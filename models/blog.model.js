@@ -13,7 +13,7 @@ const blogSchema = new Schema({
     category : {
         type:String,
         minLength : [3 , 'category Should be at least 3 character'],
-        maxLength : [30 , 'category Should be at max 30 character'],
+        maxLength : [100 , 'category Should be at max 100 character'],
         required : true,
         trim : true
     },

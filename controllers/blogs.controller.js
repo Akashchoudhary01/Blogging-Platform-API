@@ -2,50 +2,62 @@ import BLOG from "../models/blog.model.js";
 const allBlogs = async (req, res) => {
   try {
     const allpost = await BLOG.find();
-    return res.status(200).json({
-      success: true,
-      message: " All Blogs",
-      allpost,
-    });
+
+    res.render("home", { blogs: allpost }); // index.ejs
   } catch (e) {
-    return res.status(400).json({
-      success: false,
-      message: e.mess,
-    });
+    res.status(500).send(e.message);
   }
 };
+
 const createBlogs = async (req, res) => {
-  const { title, category, content, tags } = req.body;
+  try {
+    const { title, category, content, tags } = req.body;
 
-  if (!title || !category || !content || !tags) {
-    return res.status(400).json({
+    if (!title || !category || !content || !tags) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are mandatory",
+      });
+    }
+
+    const tagsArray = tags.split(",").map(tag => tag.trim());
+
+    await BLOG.create({
+      title,
+      category,
+      content,
+      tags: tagsArray,
+    });
+
+    res.redirect("/");
+
+  } catch (error) {
+    res.status(500).json({
       success: false,
-      message: "All fields are mandatory",
+      message: error.message,
     });
   }
-
-  const newPost = await BLOG.create({
-    title,
-    category,
-    content,
-    tags,
-  });
-
-  if (!newPost) {
-    return res.status(400).json({
-      success: false,
-      message: "Something Went Wrong",
-    });
-  }
-
-  await newPost.save();
-
-  res.status(201).json({
-    success: true,
-    message: "blog created Successfully",
-    data: newPost,
-  });
 };
+
+
+const allBlogsdetails = async(req , res)=>{
+    const id = req.params.id;
+
+    const blog = await BLOG.findById(id);
+
+    if(!blog){
+        return res.status(400).json({
+            success : true,
+            message : "Blog not found"
+        })
+    }
+    res.render(`/`)
+    return res.status(200).json({
+        success : true,
+        blog,
+    })
+
+}
 const editPost = async (req, res) => {
   const postId = req.params.id;
   const { title, category, content, tags } = req.body;
@@ -115,4 +127,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-export { allBlogs, createBlogs, editPost, deletePost };
+export { allBlogs, createBlogs, editPost, deletePost , allBlogsdetails };

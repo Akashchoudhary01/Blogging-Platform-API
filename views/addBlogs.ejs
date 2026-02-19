@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Blogs</title>
+    <%- include('./Partials/head.ejs') %>
+</head>
+
+<body>
+    <%- include('./Partials/nav.ejs') %>
+        <div class="container">
+           <form action="/addblog" method="POST" >
+                <div class="mb-3">
+                    <label for="title" class="form-label">title</label>
+                    <input type="text" name="title" class="form-control" id="title" aria-describedby="title">
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">category</label>
+                    <input type="text" name="category" class="form-control" id="category" aria-describedby="title">
+                </div>
+                <div class="mb-3">
+                    <label for="tags" class="form-label">tags</label>
+                    <input type="text" name="tags" class="form-control" id="tags" aria-describedby="tags">
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" name="content" placeholder="Write Your Blog"
+                        id="floatingTextarea"></textarea>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <%- include('./Partials/Script.ejs') %>
+
+</body>
+
+</html>

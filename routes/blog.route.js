@@ -16,12 +16,12 @@ route.get("/", allBlogs);
 route.post("/addblog", createBlogs);
 
 // Show single blog
-route.get("/:id", Blogsdetails);
+route.get("/blog/:id", Blogsdetails);
 
 // Update
 route.put("/:id", editPost);
 
 // Delete
-route.delete("/:id", deletePost);
+route.delete("/delete/:id", deletePost);
 
 export default route;

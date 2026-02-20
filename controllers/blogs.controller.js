@@ -51,7 +51,6 @@ const Blogsdetails = async(req , res)=>{
             message : "Blog not found"
         })
     }
-    res.render(`/`)
     return res.status(200).json({
         success : true,
         blog,
@@ -101,31 +100,34 @@ try {
 
 //
 const deletePost = async (req, res) => {
-  const id = req.params.id;
-
-  const blogs = await BLOG.findById(id);
-
-  if (!blogs) {
-    return res.status(400).json({
-      success: false,
-      message: "blog not found",
-    });
-  }
-
   try {
+    const { id } = req.params;
+
+    const blog = await BLOG.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+
     await BLOG.findByIdAndDelete(id);
 
-    return res.status(200).json({
-      success: true,
-      message: "blog deleted Successfully",
-    });
+    return res.redirect("/");
+
+    // return res.status(200).json({
+    //   success: true,
+    //   message: "Blog deleted successfully",
+    // });
   } catch (error) {
+    console.log(error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
-
 export { allBlogs, createBlogs, editPost, deletePost , Blogsdetails
  };

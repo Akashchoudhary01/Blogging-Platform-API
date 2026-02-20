@@ -10,18 +10,18 @@
 
 <body>
     <%- include('./Partials/nav.ejs') %>
-    <div class="container m-4 p-4">
+    <div class="container m-4 p-4 mb-4 ">
 
-        <div class="row">
+        <div class="row ">
             <% blogs.forEach(blog => { %>
              
                 
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-2 mb-sm-2">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><%=blog.title %></h5>
                             <p class="card-text"><%=blog.category %></p>
-                            <a href="/:id" class="btn btn-success">Read</a>
+                            <a href="/<%= blog._id %>">Read More</a> 
                         </div>
                     </div>
                 </div>

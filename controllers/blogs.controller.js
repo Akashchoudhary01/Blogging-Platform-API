@@ -58,6 +58,7 @@ const Blogsdetails = async(req , res)=>{
 
 }
 const editPost = async (req, res) => {
+  console.log("EDIT SUBMIT HIT ✅");
   const postId = req.params.id;
   const { title, category, content, tags } = req.body;
 
@@ -84,11 +85,11 @@ try {
     blog.tags = tags;
   
     await blog.save();
-  
-    return res.status(200).json({
-      success: true,
-      message: "Blog Updated Successfully",
-    });
+  return res.redirect(`/blog/${req.params.id}`);
+    // return res.status(200).json({
+    //   success: true,
+    //   message: "Blog Updated Successfully",
+    // });
 } catch (error) {
     return res.status(200).json({
         success : false,

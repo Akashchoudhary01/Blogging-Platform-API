@@ -19,7 +19,7 @@ route.post("/addblog", createBlogs);
 route.get("/blog/:id", Blogsdetails);
 
 // Update
-route.put("/:id", editPost);
+route.post("/edit/:id", editPost);
 
 // Delete
 route.delete("/delete/:id", deletePost);

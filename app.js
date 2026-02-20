@@ -7,6 +7,7 @@ import BLOG from "./models/blog.model.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -22,7 +23,7 @@ app.get("/addblog", (req, res) => {
   res.render("addblog");
 });
 
-app.get("/:id", async (req, res) => {
+app.get("/blog/:id", async (req, res) => {
   const { id } = req.params;
   const blog = await BLOG.findById(id);
      if (!blog) {
@@ -33,12 +34,14 @@ app.get("/:id", async (req, res) => {
   });
 });
 
-app.get("/:id", async (req, res) => {
+app.get("/edit/:id", async (req, res) => {
   const { id } = req.params;
   const blog = await BLOG.findById(id);
-
-  res.render("edit");
+  res.render("edit" , {
+    blog
+  });
 });
+
 
 app.get("/delete/:id", async (req, res) => {
   const { id } = req.params;

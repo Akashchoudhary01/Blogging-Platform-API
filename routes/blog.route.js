@@ -4,7 +4,7 @@ import {
   createBlogs,
   editPost,
   deletePost,
-  allBlogsdetails,
+  Blogsdetails,
 } from "../controllers/blogs.controller.js";
 
 const route = Router();
@@ -16,7 +16,7 @@ route.get("/", allBlogs);
 route.post("/addblog", createBlogs);
 
 // Show single blog
-route.get("/:id", allBlogsdetails);
+route.get("/:id", Blogsdetails);
 
 // Update
 route.put("/:id", editPost);

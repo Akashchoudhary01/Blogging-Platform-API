@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   <%- include('./Partials/head.ejs') %>
+    <%- include('./Partials/head.ejs') %>
 </head>
+
 <body>
     <%- include('./Partials/nav.ejs') %>
-    Hello World
-    <%- include('./Partials/Script.ejs') %>
-    
+    <div class="container m-4 p-4">
+
+        <div class="row">
+            <% blogs.forEach(blog => { %>
+             
+                
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=blog.title %></h5>
+                            <p class="card-text"><%=blog.category %></p>
+                            <a href="/:id" class="btn btn-success">Read</a>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+            <%- include('./Partials/Script.ejs') %>
+
 </body>
+
 </html>

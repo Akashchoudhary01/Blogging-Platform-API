@@ -40,7 +40,7 @@ const createBlogs = async (req, res) => {
 };
 
 
-const allBlogsdetails = async(req , res)=>{
+const Blogsdetails = async(req , res)=>{
     const id = req.params.id;
 
     const blog = await BLOG.findById(id);
@@ -127,4 +127,5 @@ const deletePost = async (req, res) => {
   }
 };
 
-export { allBlogs, createBlogs, editPost, deletePost , allBlogsdetails };
+export { allBlogs, createBlogs, editPost, deletePost , Blogsdetails
+ };

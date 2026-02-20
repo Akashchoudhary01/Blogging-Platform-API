@@ -1,35 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <%- include('./Partials/head.ejs') %>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>All Blogs</title>
+
+  <%- include('./Partials/head.ejs') %>
 </head>
 
 <body>
-    <%- include('./Partials/nav.ejs') %>
-    <div class="container m-4 p-4 mb-4 ">
 
-        <div class="row ">
-            <% blogs.forEach(blog => { %>
-             
+  <!-- Navbar -->
+  <%- include('./Partials/nav.ejs') %>
+
+  <!-- Main Container -->
+  <div class="container py-5">
+
+    <!-- Page Heading -->
+    <div class="text-center mb-5">
+      <h1 class="fw-bold">📚 Latest Blogs</h1>
+      <p class="text-secondary">
+        Explore thoughts, ideas, and stories
+      </p>
+    </div>
+
+    <!-- Blog Cards -->
+    <div class="row g-4">
+
+      <% blogs.forEach(blog => { %>
+
+        <div class="col-lg-4 col-md-6">
+
+          <div class="card h-100 shadow-sm border-1">
+
+            <!-- Optional Image (future use) -->
+            <!--
+            <img src="/uploads/<%= blog.image %>" 
+                 class="card-img-top" 
+                 alt="Blog Image">
+            -->
+
+            <div class="card-body d-flex flex-column">
+
                 
-                <div class="col-sm-4 mb-2 mb-sm-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><%=blog.title %></h5>
-                            <p class="card-text"><%=blog.category %></p>
-                            <a href="/blog/<%= blog._id %>">Read More</a> 
-                        </div>
-                    </div>
-                </div>
-                <% }) %>
+                <!-- Title -->
+                <h2 class="card-title fw-semibold">
+                    <%= blog.title %>
+                </h2>
+                <!-- Category Badge -->
+                <span class="mb-2 m-2">
+                  <%= blog.category %>
+                </span>
+                
+                <!-- Short Content Preview -->
+                <p class="card-text text-muted small">
+                    <%= blog.content.substring(0, 90) %>...
+                </p>
+
+              <!-- Button -->
+              <a href="/blog/<%= blog._id %>" 
+                 class="btn btn-outline-warning mt-auto w-100">
+                Read More →
+              </a>
+
+            </div>
+
+          </div>
+
         </div>
 
-            <%- include('./Partials/Script.ejs') %>
+      <% }) %>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <%- include('./Partials/Script.ejs') %>
 
 </body>
-
 </html>

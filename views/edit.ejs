@@ -1,47 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit-Blogs</title>
-    <%- include('./Partials/head.ejs') %>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Edit Blog</title>
+
+  <%- include('./Partials/head.ejs') %>
 </head>
 
 <body>
-    <%- include('./Partials/nav.ejs') %>
-        <div class="container">
-          
-                <form action="/api/v1/blogs/edit/<%= blog._id %>" method="post">
 
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input type="text" name="title" class="form-control" value="<%= blog.title %>" required>
-                </div>
+  <!-- Navbar -->
+  <%- include('./Partials/nav.ejs') %>
 
-                <div class="mb-3">
-                    <label class="form-label">Category</label>
-                    <input type="text" name="category" class="form-control" value="<%= blog.category %>" required>
-                </div>
+  <!-- Edit Form -->
+  <div class="container py-5">
 
-                <div class="mb-3">
-                    <label class="form-label">Tags</label>
-                    <input type="text" name="tags" class="form-control" value="<%= blog.tags.join(', ') %>">
-                </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
 
-                <div class="mb-3">
-                    <label class="form-label">Content</label>
-                    <textarea class="form-control" name="content" rows="5" required><%= blog.content %></textarea>
-                </div>
+        <div class="card shadow border-0">
 
-                <button type="submit" class="btn btn-warning">
-                    Update
+          <div class="card-body p-4 p-md-5">
+
+            <!-- Heading -->
+            <h2 class="text-center text-warning fw-bold mb-4">
+              ✏️ Edit Blog
+            </h2>
+
+            <!-- Form -->
+            <form action="/api/v1/blogs/edit/<%= blog._id %>" method="post">
+
+              <!-- Title -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Blog Title
+                </label>
+
+                <input 
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  placeholder="Enter blog title"
+                  value="<%= blog.title %>"
+                  required
+                />
+              </div>
+
+              <!-- Category -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Category
+                </label>
+
+                <input 
+                  type="text"
+                  name="category"
+                  class="form-control"
+                  placeholder="Eg: Technology, Life, Study"
+                  value="<%= blog.category %>"
+                  required
+                />
+              </div>
+
+              <!-- Tags -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Tags (comma separated)
+                </label>
+
+                <input 
+                  type="text"
+                  name="tags"
+                  class="form-control"
+                  placeholder="Eg: nodejs, mongodb, express"
+                  value="<%= blog.tags.join(', ') %>"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">
+                  Blog Content
+                </label>
+
+                <textarea 
+                  name="content"
+                  class="form-control"
+                  rows="6"
+                  placeholder="Write your blog here..."
+                  required
+                ><%= blog.content %></textarea>
+              </div>
+
+              <!-- Buttons -->
+              <div class="d-flex gap-3 justify-content-between">
+
+                <!-- Update -->
+                <button type="submit" class="btn btn-warning btn-lg">
+                  ✅ Update Blog
                 </button>
 
+                <!-- Cancel -->
+                <a 
+                  href="/blog/<%= blog._id %>"
+                  class="btn btn-secondary btn-lg"
+                >
+                  ❌ Cancel
+                </a>
+
+              </div>
+
             </form>
+
+          </div>
         </div>
-        <%- include('./Partials/Script.ejs') %>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <%- include('./Partials/Script.ejs') %>
 
 </body>
-
 </html>

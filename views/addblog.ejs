@@ -1,42 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add-Blogs</title>
-    <%- include('./Partials/head.ejs') %>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New Blog</title>
+  <%- include('./Partials/head.ejs') %>
 </head>
-
 <body>
-    <%- include('./Partials/nav.ejs') %>
-        <div class="container">
-           <form action="api/v1/blogs/addblog" method="post" >
-                <div class="mb-3">
-                    <label for="title" class="form-label">title</label>
-                    <input type="text" name="title" class="form-control" id="title" aria-describedby="title">
-                </div>
-                <div class="mb-3">
-                    <label for="category" class="form-label">category</label>
-                    <input type="text" name="category" class="form-control" id="category" aria-describedby="title">
-                </div>
-                <div class="mb-3">
-                    <label for="tags" class="form-label">tags</label>
-                    <input type="text" name="tags" class="form-control" id="tags" aria-describedby="tags">
-                </div>
-                <div class="form-floating mb-3">
-                    <label for="Content" class="form-label">Content</label>
-                    
-                    <textarea class="form-control" name="content" placeholder="Write Your Blog"
-                        id="floatingTextarea"></textarea>
+  <!-- Navbar -->
+  <%- include('./Partials/nav.ejs') %>
+  <!-- Main Container -->
+  <div class="container py-5">
+    <!-- Page Heading -->
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">✍️ Write a New Blog</h2>
+      <p class="text-secondary">
+        Share your thoughts with the world
+      </p>
+    </div>
 
-                </div>
+    <!-- Form Card -->
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="card shadow-sm border-0">
+
+          <div class="card-body p-4">
+
+            <form action="/api/v1/blogs/addblog" method="POST">
+
+              <!-- Title -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Blog Title
+                </label>
+
+                <input 
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  placeholder="Enter blog title"
+                  required
+                />
+              </div>
+
+              <!-- Category -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Category
+                </label>
+
+                <input 
+                  type="text"
+                  name="category"
+                  class="form-control"
+                  placeholder="Eg: Technology, Life, Study"
+                  required
+                />
+              </div>
+
+              <!-- Tags -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold">
+                  Tags (comma separated)
+                </label>
+
+                <input 
+                  type="text"
+                  name="tags"
+                  class="form-control"
+                  placeholder="Eg: nodejs, mongodb, express"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">
+                  Blog Content
+                </label>
+
+                <textarea 
+                  name="content"
+                  class="form-control"
+                  rows="6"
+                  placeholder="Write your blog here..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-warning btn-lg">
+                  Publish Blog 🚀
+                </button>
+              </div>
+
             </form>
+
+          </div>
+
         </div>
-        <%- include('./Partials/Script.ejs') %>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <%- include('./Partials/Script.ejs') %>
 
 </body>
-
 </html>

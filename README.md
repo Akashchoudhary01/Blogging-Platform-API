@@ -1,5 +1,8 @@
 # 📝 Blog Management System (Node.js + EJS)
 
+
+project given by roadmap.sh : https://roadmap.sh/projects/blogging-platform-api
+
 A full-stack Blog Management System built using **Node.js, Express, MongoDB, and EJS**.  
 Users can create, read, update, and delete blog posts with a clean UI.
 
@@ -64,3 +67,4 @@ blog_project/
 
 git clone https://github.com/Akashchoudhary01/Blogging-Platform-API.git
 cd Blogging-Platform-API
+
